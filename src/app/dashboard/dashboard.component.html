@@ -1,0 +1,32 @@
+<h1>Product Management</h1>
+<div>
+  <table border="1" width="100%" style="border-collapse: collapse;">
+    <tr>
+      <th>ID</th>
+      <th>Product Name</th>
+      <th>Product Price</th>
+      <th>Operations</th>
+    </tr>
+
+    <tr *ngFor="let product of products">
+      <td>{{ product.product_id }}</td>
+      <td>{{ product.product_name }}</td>
+      <td>{{ product.product_price }}</td>
+      <td>
+        <button (click)="deleteProduct(product.product_id)">Delete</button>
+        <button (click)="selectProduct(product)">Update</button>
+      </td>
+    </tr>
+  </table>
+
+  <br />
+  <form #f="ngForm">
+    <label>Name</label>
+    <input type="text" name="number" [(ngModel)]="selectedProduct.product_name" />
+    <br />
+    <label>Price</label>
+    <input type="text" name="amount" [(ngModel)]="selectedProduct.product_price" />
+    <br />
+    <input type="button" (click)="createOrUpdateProduct(f)" value="Create or Update Product" />
+  </form>
+</div>
