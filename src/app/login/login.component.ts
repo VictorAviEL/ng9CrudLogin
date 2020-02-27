@@ -2,9 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
+import { ApiService } from '../api.service';
 
 import { environment } from '@env/environment';
 import { Logger, I18nService, AuthenticationService, untilDestroyed } from '@app/core';
+import { Product } from '@app/product';
+import { User } from '@app/models/user';
 
 const log = new Logger('Login');
 
@@ -24,7 +27,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private i18nService: I18nService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private apiService: ApiService
   ) {
     this.createForm();
   }
@@ -32,6 +36,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {}
 
   ngOnDestroy() {}
+
+  dummyLogin() {
+    this.apiService.canMakeDummyLogin(this.loginForm.value).subscribe((isCorrect: boolean) => {
+      // console.log(isCorrect[0].exist);
+      if (isCorrect[0].exist === 1) {
+        window.open('/dashboard');
+      } else {
+        alert('No existing user! :(');
+      }
+    });
+  }
 
   login() {
     this.isLoading = true;

@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  createOrUpdateProduct(form) {
+  createOrUpdateProduct(form: any) {
     if (this.selectedProduct && this.selectedProduct.product_id) {
       // form.value.id = this.selectedProduct.product_id;
       this.apiService.updateProduct(this.selectedProduct).subscribe((product: Product) => {
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
     this.selectedProduct = product;
   }
 
-  deleteProduct(id) {
+  deleteProduct(id: number) {
     this.apiService.deleteProduct(id).subscribe((product: Product) => {
       console.log('Product deleted, ', product);
 

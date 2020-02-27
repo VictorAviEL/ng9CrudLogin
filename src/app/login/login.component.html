@@ -20,7 +20,7 @@
           <h4 class="card-title text-center">
             <i class="far fa-3x fa-user-circle text-muted"></i>
           </h4>
-          <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
+          <form (ngSubmit)="dummyLogin()" [formGroup]="loginForm" novalidate>
             <div class="alert alert-danger" [hidden]="!error || isLoading" translate>
               Username or password incorrect.
             </div>

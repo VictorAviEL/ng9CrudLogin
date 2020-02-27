@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from './product';
+import { User } from './models/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,5 +26,9 @@ export class ApiService {
 
   deleteProduct(id: number) {
     return this.httpClient.delete<Product>(`${this.PHP_API_SERVER}/api/products/${id}`);
+  }
+
+  canMakeDummyLogin(user: User) {
+    return this.httpClient.post<boolean>(`${this.PHP_API_SERVER}/api/canMakeDummyLogin`, user);
   }
 }
